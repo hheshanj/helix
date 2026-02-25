@@ -1,4 +1,4 @@
-import { _ as __vite_glob_2_1, a as __vite_glob_2_0 } from "../../../../chunks/oled-dark-mode2.js";
+import { _ as __vite_glob_2_1, b as __vite_glob_2_0, g as getPosts } from "../../../../chunks/posts.js";
 const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
   const v = glob[path];
   if (v) {
@@ -37,6 +37,11 @@ function extractHeadings(content) {
   }
   return headings;
 }
+async function getRelatedPosts(currentSlug, tags) {
+  if (!tags.length) return [];
+  const all = await getPosts();
+  return all.filter((p) => p.slug !== currentSlug && p.meta.tags?.some((t) => tags.includes(t))).slice(0, 3);
+}
 async function load({ params }) {
   const post = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../lib/content/hello-world.md": () => import("../../../../chunks/hello-world.js"), "../../../lib/content/oled-dark-mode.md": () => import("../../../../chunks/oled-dark-mode.js") }), `../../../lib/content/${params.slug}.md`, 6);
   const rawModules = /* @__PURE__ */ Object.assign({ "/src/lib/content/hello-world.md": __vite_glob_2_0, "/src/lib/content/oled-dark-mode.md": __vite_glob_2_1 });
@@ -46,7 +51,8 @@ async function load({ params }) {
     content: post.default,
     meta: post.metadata,
     readingTime: estimateReadingTime(rawContent),
-    headings: extractHeadings(rawContent)
+    headings: extractHeadings(rawContent),
+    relatedPosts: await getRelatedPosts(params.slug, post.metadata.tags ?? [])
   };
 }
 const prerender = true;

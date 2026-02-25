@@ -34,6 +34,21 @@ function extractHeadings(content) {
     return headings;
 }
 
+import { getPosts } from '$lib/posts.js';
+
+/**
+ * Get related posts by matching tags, excluding the current slug.
+ * @param {string} currentSlug
+ * @param {string[]} tags
+ */
+async function getRelatedPosts(currentSlug, tags) {
+    if (!tags.length) return [];
+    const all = await getPosts();
+    return all
+        .filter(p => p.slug !== currentSlug && p.meta.tags?.some(t => tags.includes(t)))
+        .slice(0, 3);
+}
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
     const post = await import(`../../../lib/content/${params.slug}.md`);
@@ -47,7 +62,8 @@ export async function load({ params }) {
         content: post.default,
         meta: post.metadata,
         readingTime: estimateReadingTime(rawContent),
-        headings: extractHeadings(rawContent)
+        headings: extractHeadings(rawContent),
+        relatedPosts: await getRelatedPosts(params.slug, post.metadata.tags ?? [])
     };
 }
 

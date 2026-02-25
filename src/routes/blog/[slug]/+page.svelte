@@ -1,6 +1,10 @@
 <script>
   import AuthorBio from '$lib/components/AuthorBio.svelte';
   import TableOfContents from '$lib/components/TableOfContents.svelte';
+  import ShareButtons from '$lib/components/ShareButtons.svelte';
+  import PostCard from '$lib/components/PostCard.svelte';
+  import Giscus from '$lib/components/Giscus.svelte';
+  import { copyCode } from '$lib/actions/copyCode.js';
 
   let { data } = $props();
 
@@ -62,17 +66,39 @@
       {/if}
 
       <div class="w-16 h-1 bg-primary rounded-full mx-auto mt-8"></div>
+
+      <!-- Share Buttons -->
+      <ShareButtons title={data.meta.title} />
     </header>
 
     <!-- Markdown Body -->
-    <div class="prose">
+    <div class="prose" use:copyCode>
       <data.content />
     </div>
 
     <!-- Author Bio -->
     <div class="mt-16 pt-8 border-t border-outline-variant/20">
-      <AuthorBio name="Heshan" github="heshanJ" twitter="" />
+      <AuthorBio name="Heshan" github="hheshanj" twitter="" />
     </div>
+
+    <!-- Related Posts -->
+    {#if data.relatedPosts?.length}
+      <div class="mt-12 pt-8 border-t border-outline-variant/20">
+        <h2 class="text-headline-sm text-on-surface mb-6">Related Posts</h2>
+        <div class="flex flex-col gap-4">
+          {#each data.relatedPosts as post}
+            <PostCard
+              title={post.meta.title}
+              description={post.meta.description}
+              date={post.meta.date}
+              slug={post.slug}
+              readingTime={post.readingTime}
+              tags={post.meta.tags ?? []}
+            />
+          {/each}
+        </div>
+      </div>
+    {/if}
 
     <!-- Back link -->
     <div class="mt-8">
@@ -86,6 +112,9 @@
         Back to blog
       </a>
     </div>
+
+    <!-- Comments -->
+    <Giscus />
   </article>
 
   <!-- Table of Contents -->

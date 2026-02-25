@@ -186,6 +186,37 @@
     overflow-wrap: normal;
   }
 
+  /* Copy code button (injected by copyCode action) */
+  .prose pre .copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 9999px;
+    background: rgb(var(--color-surface-container-high) / 0.9);
+    color: rgb(var(--color-on-surface-variant));
+    border: 1px solid rgb(var(--color-outline-variant) / 0.3);
+    font-size: 0.7rem;
+    font-family: var(--font-mono, monospace);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .prose pre:hover .copy-btn {
+    opacity: 1;
+  }
+
+  .prose pre .copy-btn.copied {
+    background: rgb(var(--color-primary) / 0.15);
+    color: rgb(var(--color-primary));
+    border-color: rgb(var(--color-primary) / 0.4);
+  }
+
   /* Shiki code block styling */
   .prose .shiki {
     @apply bg-surface-container p-6 rounded-3xl my-8 overflow-x-auto border border-outline-variant/20;
@@ -243,3 +274,144 @@
     }
   }
 }
+
+/* === View Transitions === */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: 180ms ease both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 280ms ease both fade-in;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* === Lazy Image Loading + Skeleton === */
+.prose img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.prose img.loaded {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.prose img:not(.loaded) {
+  background: linear-gradient(90deg,
+      rgb(var(--color-surface-container)) 25%,
+      rgb(var(--color-surface-container-high)) 50%,
+      rgb(var(--color-surface-container)) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* === Component Styles (Moved here to fix Vite 6 SSR issue) === */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: rgb(var(--color-primary));
+  z-index: 100;
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-on-primary));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  animation: pop-in 0.2s ease both;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top:active {
+  transform: translateY(0);
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.share-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  background: rgb(var(--color-surface-container));
+  color: rgb(var(--color-on-surface-variant));
+  border: 1px solid rgb(var(--color-outline-variant) / 0.2);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.share-btn:hover {
+  background: rgb(var(--color-surface-container-high));
+  color: rgb(var(--color-primary));
+  transform: translateY(-1px);
+}
+
+/* === View Transitions === */

@@ -1,1 +1,0 @@
-import{b as v,h as o,c as y,E as l,r as T,s as f,d as p,B as g,g as i,H as m,i as A}from"./BtMtoYAL.js";function R(d,_,s){var e;o&&(e=A,y());var r=new g(d);v(()=>{var a=_()??null;if(o){var h=T(e),c=h===m,u=a!==null;if(c!==u){var t=f();p(t),r.anchor=t,i(!1),r.ensure(a,a&&(n=>s(n,a))),i(!0);return}}r.ensure(a,a&&(n=>s(n,a)))},l)}export{R as c};

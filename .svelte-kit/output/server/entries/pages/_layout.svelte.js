@@ -1,4 +1,5 @@
-import { a as attr_class, b as attr, s as stringify, e as escape_html, h as head } from "../../chunks/index.js";
+import { a as attr_class, b as attr, c as stringify, e as escape_html, d as attr_style, h as head, u as unsubscribe_stores, f as derived, g as store_get } from "../../chunks/index.js";
+import { t as theme, p as page } from "../../chunks/stores.js";
 import "clsx";
 import "@sveltejs/kit/internal";
 import "../../chunks/exports.js";
@@ -6,39 +7,10 @@ import "../../chunks/utils.js";
 import "@sveltejs/kit/internal/server";
 import "../../chunks/root.js";
 import "../../chunks/state.svelte.js";
-class ThemeStore {
-  /** @type {'light' | 'dark'} */
-  current = "dark";
-  constructor() {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme");
-      this.current = saved === "light" ? "light" : "dark";
-      this.#apply();
-    }
-  }
-  get isDark() {
-    return this.current === "dark";
-  }
-  toggle() {
-    this.current = this.current === "dark" ? "light" : "dark";
-    this.#apply();
-  }
-  #apply() {
-    if (typeof document === "undefined") return;
-    const html = document.documentElement;
-    if (this.current === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-    localStorage.setItem("theme", this.current);
-  }
-}
-const theme = new ThemeStore();
 function Navbar($$renderer, $$props) {
   $$renderer.component(($$renderer2) => {
     let menuOpen = false;
-    $$renderer2.push(`<nav${attr_class(`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${stringify("bg-transparent")}`)}><div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between"><a href="/" class="text-title-lg text-on-surface hover:text-primary transition-colors">Helix</a> <div class="hidden md:flex items-center gap-2"><a href="/" class="px-4 py-2 rounded-full text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200">Home</a> <a href="/#posts" class="px-4 py-2 rounded-full text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200">Search</a> <button class="p-2 rounded-full hover:bg-surface-container-high transition-all duration-200 ml-2" aria-label="Toggle theme">`);
+    $$renderer2.push(`<nav${attr_class(`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${stringify("bg-transparent")}`)}><div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between"><a href="/" class="text-title-lg text-on-surface hover:text-primary transition-colors">Helix</a> <div class="hidden md:flex items-center gap-2"><a href="/" class="px-4 py-2 rounded-full text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200">Home</a> <a href="/#posts" class="px-4 py-2 rounded-full text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200">Search</a> <a href="/rss.xml" data-sveltekit-reload="" class="p-2 rounded-full hover:bg-surface-container-high transition-all duration-200 ml-1 text-on-surface-variant hover:text-primary" aria-label="RSS Feed"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"></path></svg></a> <button class="p-2 rounded-full hover:bg-surface-container-high transition-all duration-200 ml-2" aria-label="Toggle theme">`);
     if (theme.isDark) {
       $$renderer2.push("<!--[-->");
       $$renderer2.push(`<svg class="w-5 h-5 text-on-surface-variant" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>`);
@@ -71,25 +43,49 @@ function Footer($$renderer, $$props) {
     $$renderer2.push(`<footer class="mt-20 border-t border-outline-variant/20 bg-surface-container py-12 px-6"><div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 justify-between"><div class="max-w-xs"><h2 class="text-title-lg text-on-surface mb-3">Heshan's Blog</h2> <p class="text-body-md text-on-surface-variant">Ramblings on web development, design systems, and building things that matter.</p></div> <div class="flex gap-16"><div class="flex flex-col gap-3"><h3 class="text-label-lg text-on-surface uppercase tracking-wider">Navigation</h3> <a href="/" class="text-body-md text-on-surface-variant hover:text-primary transition-colors">Home</a> <a href="/#posts" class="text-body-md text-on-surface-variant hover:text-primary transition-colors">Search Blog</a> <a href="/rss.xml" class="text-body-md text-on-surface-variant hover:text-primary transition-colors" data-sveltekit-reload="">RSS Feed</a></div> <div class="flex flex-col gap-3"><h3 class="text-label-lg text-on-surface uppercase tracking-wider">Connect</h3> <div class="flex gap-4 mt-1"><a href="https://github.com/heshanJ" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="GitHub"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg></a> <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="X / Twitter"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a> <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a></div></div></div></div> <div class="max-w-5xl mx-auto mt-12 pt-8 border-t border-outline-variant/10 text-body-sm text-on-surface-variant flex flex-col md:flex-row justify-between items-center gap-4 text-center"><p>© ${escape_html((/* @__PURE__ */ new Date()).getFullYear())} Heshan. All rights reserved.</p> <p>Built with <a href="https://kit.svelte.dev" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">SvelteKit</a> &amp; <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Tailwind CSS</a>.</p></div></footer>`);
   });
 }
-function _layout($$renderer, $$props) {
-  let { children } = $$props;
-  head("12qhfyh", $$renderer, ($$renderer2) => {
-    $$renderer2.title(($$renderer3) => {
-      $$renderer3.push(`<title>Helix</title>`);
-    });
-    $$renderer2.push(`<meta name="description" content="A high-performance personal blog built with SvelteKit and Material Design 3."/> <link rel="alternate" type="application/rss+xml" title="Helix RSS" href="/rss.xml"/>`);
-  });
-  $$renderer.push(`<div class="min-h-screen bg-surface text-on-surface flex flex-col">`);
-  Navbar($$renderer);
-  $$renderer.push(`<!----> <main class="pt-20 page-transition flex-1">`);
-  children($$renderer);
-  $$renderer.push(`<!----></main> `);
-  Footer($$renderer);
-  $$renderer.push(`<!----></div> `);
+function ReadingProgress($$renderer) {
+  let progress = 0;
+  $$renderer.push(`<div class="reading-progress-bar"${attr_style(`width: ${stringify(progress)}%`)} role="progressbar"${attr("aria-valuenow", Math.round(progress))} aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>`);
+}
+function BackToTop($$renderer) {
   {
     $$renderer.push("<!--[!-->");
   }
   $$renderer.push(`<!--]-->`);
+}
+function _layout($$renderer, $$props) {
+  $$renderer.component(($$renderer2) => {
+    var $$store_subs;
+    let { children } = $$props;
+    let isBlogPost = derived(() => store_get($$store_subs ??= {}, "$page", page).url.pathname.startsWith("/blog/"));
+    head("12qhfyh", $$renderer2, ($$renderer3) => {
+      $$renderer3.title(($$renderer4) => {
+        $$renderer4.push(`<title>Helix</title>`);
+      });
+      $$renderer3.push(`<meta name="description" content="A high-performance personal blog built with SvelteKit and Material Design 3."/> <link rel="alternate" type="application/rss+xml" title="Helix RSS" href="/rss.xml"/>`);
+    });
+    $$renderer2.push(`<div class="min-h-screen bg-surface text-on-surface flex flex-col">`);
+    if (isBlogPost()) {
+      $$renderer2.push("<!--[-->");
+      ReadingProgress($$renderer2);
+    } else {
+      $$renderer2.push("<!--[!-->");
+    }
+    $$renderer2.push(`<!--]--> `);
+    BackToTop($$renderer2);
+    $$renderer2.push(`<!----> `);
+    Navbar($$renderer2);
+    $$renderer2.push(`<!----> <main class="pt-20 page-transition flex-1">`);
+    children($$renderer2);
+    $$renderer2.push(`<!----></main> `);
+    Footer($$renderer2);
+    $$renderer2.push(`<!----></div> `);
+    {
+      $$renderer2.push("<!--[!-->");
+    }
+    $$renderer2.push(`<!--]-->`);
+    if ($$store_subs) unsubscribe_stores($$store_subs);
+  });
 }
 export {
   _layout as default

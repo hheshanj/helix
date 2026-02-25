@@ -1,0 +1,25 @@
+
+			if (node.inline_styles && !client.inline) {
+				Object.entries(await node.inline_styles()).forEach(([filename, css]) => {
+					if (typeof css === 'string') {
+						inline_styles.set(filename, css);
+						return;
+					}
+
+					inline_styles.set(filename, css(`${assets}/${paths.app_dir}/immutable/assets`, assets));
+				});
+			}
+		}
+	} else {
+		rendered = { head: '', html: '', css: { code: '', map: null }, hashes: { script: [] } };
+	}
+
+	const head = new Head(rendered.head, !!state.prerendering);
+	let body = rendered.html;
+
+	/** @param {string} path */
+	const prefixed = (path) => {
+		if (path.startsWith('/')) {
+			// Vite makes the start script available through the base path and without it.
+			// We load it via the base path in order to support remote IDE environments which proxy
+			// all URLs under the base path during development.

@@ -1,0 +1,15 @@
+<script src="https://giscus.app/client.js"
+        data-repo="hheshanj/helix"
+        data-repo-id="R_kgDORYgIjg"
+        data-category="General"
+        data-category-id="DIC_kwDORYgIjs4C3LMY"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>

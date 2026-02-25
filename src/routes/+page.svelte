@@ -1,12 +1,12 @@
 <script>
   import PostCard from '$lib/components/PostCard.svelte';
-  import { getAllTags } from '$lib/posts.js';
+  import { browser } from '$app/environment';
 
   let { data } = $props();
 
   let activeTag = $state('');
   let searchQuery = $state('');
-  let allTags = $derived(getAllTags(data.posts));
+  let allTags = $derived(data.allTags);
   let filteredPosts = $derived(
     data.posts.filter(p => {
       const matchTag = activeTag ? p.meta.tags?.includes(activeTag) : true;
@@ -15,7 +15,29 @@
       return matchTag && matchSearch;
     })
   );
+
+  const PAGE_SIZE = 5;
+  let visibleCount = $state(PAGE_SIZE);
+  let visiblePosts = $derived(filteredPosts.slice(0, visibleCount));
+  let hasMore = $derived(visibleCount < filteredPosts.length);
+
+  // Reset pagination when filters change
+  $effect(() => {
+    searchQuery; activeTag; // track these
+    visibleCount = PAGE_SIZE;
+  });
+
+  function handleKeydown(e) {
+    // Ignore if user is already typing in an input/textarea
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) return;
+    if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key === 'k')) {
+      e.preventDefault();
+      document.getElementById('search-input')?.focus();
+    }
+  }
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <svelte:head>
   <title>Helix — Home</title>
@@ -50,9 +72,10 @@
           </svg>
         </div>
         <input
+          id="search-input"
           type="search"
           bind:value={searchQuery}
-          placeholder="Search posts..."
+          placeholder="Search posts... (press / to focus)"
           class="w-full py-4 pl-12 pr-4 bg-surface-container rounded-full text-body-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all border border-outline-variant/20"
         >
       </div>
@@ -86,7 +109,7 @@
 
     <!-- Posts List -->
     <div class="flex flex-col gap-4">
-      {#each filteredPosts as post}
+      {#each visiblePosts as post}
         <PostCard
           title={post.meta.title}
           description={post.meta.description}
@@ -99,5 +122,17 @@
         <p class="text-body-lg text-on-surface-variant py-8 text-center bg-surface-container rounded-3xl border border-outline-variant/20">No posts found matching your criteria.</p>
       {/each}
     </div>
+
+    <!-- Load More -->
+    {#if hasMore}
+      <div class="flex justify-center mt-8">
+        <button
+          onclick={() => visibleCount += PAGE_SIZE}
+          class="px-8 py-3 rounded-full bg-surface-container border border-outline-variant/20 text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-all duration-200"
+        >
+          Load more ({filteredPosts.length - visibleCount} remaining)
+        </button>
+      </div>
+    {/if}
   </div>
 </section>

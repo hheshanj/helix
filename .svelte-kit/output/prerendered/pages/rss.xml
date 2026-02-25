@@ -5,7 +5,7 @@
     <description>A high-performance personal blog built with SvelteKit and Material Design 3.</description>
     <link>https://materialblog.dev</link>
     <atom:link href="https://materialblog.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 25 Feb 2026 08:06:05 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 25 Feb 2026 19:38:24 GMT</lastBuildDate>
     
     <item>
       <title>Hello World: SvelteKit + Material You</title>
