@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Helix</title>
+    <description>A high-performance personal blog built with SvelteKit and Material Design 3.</description>
+    <link>https://materialblog.dev</link>
+    <atom:link href="https://materialblog.dev/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Feb 2026 08:06:05 GMT</lastBuildDate>
+    
+    <item>
+      <title>Hello World: SvelteKit + Material You</title>
+      <description>Welcome to my blog built with SvelteKit, Tailwind CSS, and Material Design 3 aesthetics. Fast, modern, and beautifully dark.</description>
+      <link>https://materialblog.dev/blog/hello-world</link>
+      <guid isPermaLink="true">https://materialblog.dev/blog/hello-world</guid>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 GMT</pubDate>
+      <category>sveltekit</category>
+      <category>design</category>
+      <category>web</category>
+    </item>
+    <item>
+      <title>Optimizing for OLED: The Case for True Black</title>
+      <description>Why #000000 matters for OLED screens and how to build a dark theme that takes full advantage of pixel-off black.</description>
+      <link>https://materialblog.dev/blog/oled-dark-mode</link>
+      <guid isPermaLink="true">https://materialblog.dev/blog/oled-dark-mode</guid>
+      <pubDate>Mon, 23 Feb 2026 00:00:00 GMT</pubDate>
+      <category>design</category>
+      <category>css</category>
+      <category>performance</category>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,171 @@
+{
+  ".svelte-kit/generated/client-optimized/app.js": {
+    "file": "_app/immutable/entry/app.DsmVSV_C.js",
+    "name": "entry/app",
+    "src": ".svelte-kit/generated/client-optimized/app.js",
+    "isEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_u9O7V38D.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/generated/client-optimized/nodes/0.js",
+      ".svelte-kit/generated/client-optimized/nodes/1.js",
+      ".svelte-kit/generated/client-optimized/nodes/2.js",
+      ".svelte-kit/generated/client-optimized/nodes/3.js"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/0.js": {
+    "file": "_app/immutable/nodes/0.CuThgJ_r.js",
+    "name": "nodes/0",
+    "src": ".svelte-kit/generated/client-optimized/nodes/0.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_Dd-2ItXg.js",
+      "_Gb1Kp8MM.js",
+      "_CS5Wmju8.js",
+      "node_modules/@sveltejs/kit/src/runtime/client/entry.js"
+    ],
+    "css": [
+      "_app/immutable/assets/0.JmBcx8MF.css"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/1.js": {
+    "file": "_app/immutable/nodes/1.Dpq72KL5.js",
+    "name": "nodes/1",
+    "src": ".svelte-kit/generated/client-optimized/nodes/1.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_CS5Wmju8.js",
+      "_Dd-2ItXg.js",
+      "node_modules/@sveltejs/kit/src/runtime/client/entry.js"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/2.js": {
+    "file": "_app/immutable/nodes/2.CAnT5PmC.js",
+    "name": "nodes/2",
+    "src": ".svelte-kit/generated/client-optimized/nodes/2.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_C4Winbw8.js",
+      "_Dd-2ItXg.js",
+      "_Gb1Kp8MM.js"
+    ],
+    "dynamicImports": [
+      "src/lib/content/hello-world.md",
+      "src/lib/content/oled-dark-mode.md"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/3.js": {
+    "file": "_app/immutable/nodes/3.Dj2zeKQt.js",
+    "name": "nodes/3",
+    "src": ".svelte-kit/generated/client-optimized/nodes/3.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_C4Winbw8.js",
+      "_Dv-8bcD8.js",
+      "_Dd-2ItXg.js",
+      "_Gb1Kp8MM.js"
+    ],
+    "dynamicImports": [
+      "src/lib/content/hello-world.md",
+      "src/lib/content/oled-dark-mode.md",
+      "src/lib/content/hello-world.md",
+      "src/lib/content/oled-dark-mode.md"
+    ]
+  },
+  "_BtMtoYAL.js": {
+    "file": "_app/immutable/chunks/BtMtoYAL.js",
+    "name": "disclose-version"
+  },
+  "_C4Winbw8.js": {
+    "file": "_app/immutable/chunks/C4Winbw8.js",
+    "name": "oled-dark-mode",
+    "imports": [
+      "_BtMtoYAL.js"
+    ]
+  },
+  "_CS5Wmju8.js": {
+    "file": "_app/immutable/chunks/CS5Wmju8.js",
+    "name": "legacy",
+    "imports": [
+      "_BtMtoYAL.js"
+    ]
+  },
+  "_Dd-2ItXg.js": {
+    "file": "_app/immutable/chunks/Dd-2ItXg.js",
+    "name": "svelte-head",
+    "imports": [
+      "_BtMtoYAL.js"
+    ]
+  },
+  "_Dv-8bcD8.js": {
+    "file": "_app/immutable/chunks/Dv-8bcD8.js",
+    "name": "svelte-component",
+    "imports": [
+      "_BtMtoYAL.js"
+    ]
+  },
+  "_Gb1Kp8MM.js": {
+    "file": "_app/immutable/chunks/Gb1Kp8MM.js",
+    "name": "attributes",
+    "imports": [
+      "_BtMtoYAL.js"
+    ]
+  },
+  "__vite-browser-external": {
+    "file": "_app/immutable/chunks/BIHI7g3E.js",
+    "name": "__vite-browser-external",
+    "src": "__vite-browser-external",
+    "isDynamicEntry": true
+  },
+  "_u9O7V38D.js": {
+    "file": "_app/immutable/chunks/u9O7V38D.js",
+    "name": "root",
+    "imports": [
+      "_BtMtoYAL.js",
+      "_Dv-8bcD8.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/client/entry.js": {
+    "file": "_app/immutable/entry/start.D9cNVTz-.js",
+    "name": "entry/start",
+    "src": "node_modules/@sveltejs/kit/src/runtime/client/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_u9O7V38D.js",
+      "_BtMtoYAL.js"
+    ],
+    "dynamicImports": [
+      "__vite-browser-external"
+    ]
+  },
+  "src/lib/content/hello-world.md": {
+    "file": "_app/immutable/chunks/7jjCEx-q.js",
+    "name": "hello-world",
+    "src": "src/lib/content/hello-world.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_CS5Wmju8.js"
+    ]
+  },
+  "src/lib/content/oled-dark-mode.md": {
+    "file": "_app/immutable/chunks/DAQJ9GBI.js",
+    "name": "oled-dark-mode",
+    "src": "src/lib/content/oled-dark-mode.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_BtMtoYAL.js",
+      "_CS5Wmju8.js"
+    ]
+  }
+}

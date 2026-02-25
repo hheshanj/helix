@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ===== M3 Color Tokens as CSS Custom Properties ===== */
+
+  /* Light Mode — Warm Sage & Coral */
+  :root {
+    --color-surface: 250 247 240;
+    --color-surface-dim: 240 236 228;
+    --color-surface-container: 232 228 218;
+    --color-surface-container-high: 222 218 207;
+    --color-surface-container-highest: 212 207 196;
+    --color-surface-variant: 186 180 168;
+    --color-primary: 186 68 53;
+    --color-primary-container: 255 218 212;
+    --color-primary-on-container: 65 14 8;
+    --color-secondary: 87 82 72;
+    --color-secondary-container: 213 207 194;
+    --color-secondary-on-container: 42 38 30;
+    --color-tertiary: 115 93 52;
+    --color-tertiary-container: 248 224 178;
+    --color-tertiary-on-container: 50 37 8;
+    --color-error: 179 38 30;
+    --color-error-container: 249 222 220;
+    --color-outline: 130 124 114;
+    --color-outline-variant: 203 196 184;
+    --color-on-surface: 32 28 24;
+    --color-on-surface-variant: 80 75 66;
+    --color-inverse-surface: 52 48 42;
+    --color-inverse-on-surface: 247 240 230;
+  }
+
+  /* Dark Mode — Deep Aubergine & Amber */
+  .dark {
+    --color-surface: 12 8 16;
+    --color-surface-dim: 18 14 22;
+    --color-surface-container: 30 24 36;
+    --color-surface-container-high: 42 35 50;
+    --color-surface-container-highest: 54 46 64;
+    --color-surface-variant: 78 68 90;
+    --color-primary: 255 183 77;
+    --color-primary-container: 122 68 0;
+    --color-primary-on-container: 255 221 175;
+    --color-secondary: 206 195 182;
+    --color-secondary-container: 64 56 46;
+    --color-secondary-on-container: 232 222 210;
+    --color-tertiary: 230 186 138;
+    --color-tertiary-container: 88 68 32;
+    --color-tertiary-on-container: 248 224 178;
+    --color-error: 242 184 181;
+    --color-error-container: 140 29 24;
+    --color-outline: 152 142 158;
+    --color-outline-variant: 78 68 90;
+    --color-on-surface: 236 228 240;
+    --color-on-surface-variant: 206 196 216;
+    --color-inverse-surface: 236 228 240;
+    --color-inverse-on-surface: 52 46 58;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-on-surface font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-on-surface;
+  }
+
+  /* Scrollbar — thin, M3-like */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-outline-variant rounded-full;
+  }
+
+  /* Page transition */
+  .page-transition {
+    animation: pageIn 0.3s ease-out;
+  }
+
+  @keyframes pageIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Markdown prose styling */
+@layer components {
+  .prose {
+    @apply text-on-surface text-body-lg leading-relaxed;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .prose h1 {
+    @apply text-display-sm text-on-surface mt-12 mb-6 scroll-mt-24;
+  }
+
+  .prose h2 {
+    @apply text-headline-lg text-on-surface mt-10 mb-4 scroll-mt-24;
+  }
+
+  .prose h3 {
+    @apply text-headline-sm text-on-surface mt-8 mb-3 scroll-mt-24;
+  }
+
+  .prose h4 {
+    @apply text-title-lg text-on-surface mt-6 mb-2 scroll-mt-24;
+  }
+
+  /* Heading anchor links from rehype-autolink-headings */
+  .prose h1 a,
+  .prose h2 a,
+  .prose h3 a,
+  .prose h4 a {
+    @apply no-underline text-on-surface hover:text-primary transition-colors;
+  }
+
+  .prose p {
+    @apply mb-6;
+  }
+
+  .prose a {
+    @apply text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary/80 transition-colors;
+  }
+
+  .prose strong {
+    @apply font-semibold text-on-surface;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-primary/40 pl-6 py-2 my-6 bg-surface-container rounded-r-2xl text-on-surface-variant italic;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply mb-6 pl-6 space-y-2;
+  }
+
+  .prose ul {
+    @apply list-disc;
+  }
+
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose code {
+    @apply bg-surface-container-high text-tertiary px-1.5 py-0.5 rounded-lg text-body-md font-mono;
+    overflow-wrap: break-word;
+    word-break: break-all;
+  }
+
+  .prose pre {
+    @apply bg-surface-container p-6 rounded-3xl my-8 overflow-x-auto border border-outline-variant/20;
+    max-width: 100%;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0 rounded-none text-on-surface;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  /* Shiki code block styling */
+  .prose .shiki {
+    @apply bg-surface-container p-6 rounded-3xl my-8 overflow-x-auto border border-outline-variant/20;
+    max-width: 100%;
+  }
+
+  .prose .shiki code {
+    @apply bg-transparent p-0 rounded-none text-body-md font-mono;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  .prose img {
+    @apply rounded-3xl my-8 w-full cursor-zoom-in;
+  }
+
+  .prose hr {
+    @apply border-outline-variant/40 my-10;
+  }
+
+  .prose table {
+    @apply w-full my-8 border-collapse;
+  }
+
+  .prose th {
+    @apply text-left text-label-lg text-on-surface p-3 border-b-2 border-outline-variant/30;
+  }
+
+  .prose td {
+    @apply text-body-md text-on-surface-variant p-3 border-b border-outline-variant/10;
+  }
+}
+
+/* Lightbox overlay */
+@layer utilities {
+  .lightbox-overlay {
+    @apply fixed inset-0 z-[100] bg-surface/95 backdrop-blur-xl flex items-center justify-center cursor-zoom-out;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    @apply rounded-2xl;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}

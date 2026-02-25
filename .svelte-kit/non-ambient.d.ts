@@ -1,0 +1,45 @@
+
+// this file is generated — do not edit it
+
+
+declare module "svelte/elements" {
+	export interface HTMLAttributes<T> {
+		'data-sveltekit-keepfocus'?: true | '' | 'off' | undefined | null;
+		'data-sveltekit-noscroll'?: true | '' | 'off' | undefined | null;
+		'data-sveltekit-preload-code'?:
+			| true
+			| ''
+			| 'eager'
+			| 'viewport'
+			| 'hover'
+			| 'tap'
+			| 'off'
+			| undefined
+			| null;
+		'data-sveltekit-preload-data'?: true | '' | 'hover' | 'tap' | 'off' | undefined | null;
+		'data-sveltekit-reload'?: true | '' | 'off' | undefined | null;
+		'data-sveltekit-replacestate'?: true | '' | 'off' | undefined | null;
+	}
+}
+
+export {};
+
+
+declare module "$app/types" {
+	export interface AppTypes {
+		RouteId(): "/" | "/blog" | "/blog/[slug]" | "/rss.xml" | "/sitemap.xml";
+		RouteParams(): {
+			"/blog/[slug]": { slug: string }
+		};
+		LayoutParams(): {
+			"/": { slug?: string };
+			"/blog": { slug?: string };
+			"/blog/[slug]": { slug: string };
+			"/rss.xml": Record<string, never>;
+			"/sitemap.xml": Record<string, never>
+		};
+		Pathname(): "/" | `/blog/${string}` & {} | `/blog/${string}/` & {} | "/rss.xml" | "/sitemap.xml";
+		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
+		Asset(): "/favicon.png" | string & {};
+	}
+}
