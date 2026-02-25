@@ -140,7 +140,7 @@ function _page($$renderer, $$props) {
       $$renderer2.push("<!--]-->");
     }
     $$renderer2.push(`</div> <div class="mt-16 pt-8 border-t border-outline-variant/20">`);
-    AuthorBio($$renderer2, { name: "Heshan", github: "heshanJ", twitter: "" });
+    AuthorBio($$renderer2, { name: "Heshan", github: "hheshanj", twitter: "" });
     $$renderer2.push(`<!----></div> `);
     if (data.relatedPosts?.length) {
       $$renderer2.push("<!--[-->");
