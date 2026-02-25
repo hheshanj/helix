@@ -1,13 +1,13 @@
-import { getPosts } from '$lib/posts.js';
+import { getPosts } from "$lib/posts.js";
 
 export const prerender = true;
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {
-    const posts = await getPosts();
-    const siteUrl = 'https://materialblog.dev';
+  const posts = await getPosts();
+  const siteUrl = "https://materialblog.dev";
 
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Helix</title>
@@ -16,35 +16,35 @@ export async function GET() {
     <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     ${posts
-            .map(
-                (post) => `
+      .map(
+        (post) => `
     <item>
       <title>${escapeXml(post.meta.title)}</title>
       <description>${escapeXml(post.meta.description)}</description>
       <link>${siteUrl}/blog/${post.slug}</link>
       <guid isPermaLink="true">${siteUrl}/blog/${post.slug}</guid>
       <pubDate>${new Date(post.meta.date).toUTCString()}</pubDate>
-      ${(post.meta.tags ?? []).map((t) => `<category>${escapeXml(t)}</category>`).join('\n      ')}
-    </item>`
-            )
-            .join('')}
+      ${(post.meta.tags ?? []).map((t) => `<category>${escapeXml(t)}</category>`).join("\n      ")}
+    </item>`,
+      )
+      .join("")}
   </channel>
 </rss>`;
 
-    return new Response(xml.trim(), {
-        headers: {
-            'Content-Type': 'application/xml',
-            'Cache-Control': 'max-age=0, s-maxage=3600'
-        }
-    });
+  return new Response(xml.trim(), {
+    headers: {
+      "Content-Type": "application/xml",
+      "Cache-Control": "max-age=0, s-maxage=3600",
+    },
+  });
 }
 
 /** @param {string} str */
 function escapeXml(str) {
-    return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;');
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
