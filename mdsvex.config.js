@@ -9,7 +9,7 @@ function getHighlighter() {
     if (!highlighterPromise) {
         highlighterPromise = createHighlighter({
             themes: ['github-dark-default'],
-            langs: ['javascript', 'typescript', 'html', 'css', 'svelte', 'json', 'bash', 'markdown', 'python']
+            langs: ['javascript', 'typescript', 'html', 'css', 'svelte', 'json', 'bash', 'markdown', 'python', 'yaml']
         });
     }
     return highlighterPromise;
