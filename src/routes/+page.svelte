@@ -48,12 +48,15 @@
 
 <section class="max-w-3xl mx-auto px-6 py-16">
   <!-- Hero -->
-  <div class="mb-16 animate-fade-in">
-    <h1 class="text-display-sm md:text-display-md text-on-surface mb-4">
-      Hey, I'm <span class="text-primary">Heshan</span>
+  <div class="mb-16 animate-fade-in p-8 md:p-12 rounded-3xl bg-surface-container/60 border border-outline-variant/20 backdrop-blur-sm relative overflow-hidden">
+    <!-- Subtle gradient accent -->
+    <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-tertiary/8 rounded-full blur-3xl pointer-events-none"></div>
+    <h1 class="text-display-sm md:text-display-md text-on-surface mb-4 relative z-10">
+      Welcome to <span class="text-primary">Helix</span>
     </h1>
-    <p class="text-headline-sm text-on-surface-variant max-w-lg">
-      Welcome to my corner of the internet. I write about code, design, and everything in between.
+    <p class="text-headline-sm text-on-surface-variant max-w-lg relative z-10">
+      A corner where I write about the things i made, discovered and broke.
     </p>
   </div>
 

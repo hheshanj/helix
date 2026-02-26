@@ -40,6 +40,6 @@ declare module "$app/types" {
 		};
 		Pathname(): "/" | `/blog/${string}` & {} | `/blog/${string}/` & {} | "/rss.xml" | "/sitemap.xml";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
-		Asset(): "/favicon.png" | string & {};
+		Asset(): "/HELIX-nobackground.png" | "/HELIX.png" | "/logo-helix.ng.png" | string & {};
 	}
 }
