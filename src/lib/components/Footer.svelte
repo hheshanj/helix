@@ -46,7 +46,7 @@
   </div>
 
   <div class="max-w-5xl mx-auto mt-12 pt-8 border-t border-outline-variant/10 text-body-sm text-on-surface-variant flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-    <p>© {new Date().getFullYear()} Heshan. All rights reserved.</p>
+    <p>© {new Date().getFullYear()} Helix. All rights reserved.</p>
     <p>Built with <a href="https://kit.svelte.dev" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">SvelteKit</a> & <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Tailwind CSS</a>.</p>
   </div>
 </footer>
